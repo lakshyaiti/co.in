@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAKSHYA PRIVATE ITI - Elite Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- ORIGINAL NAVY & GOLD THEME VARIABLES --- */
+        :root {
+            --primary: #0A192F;      
+            --primary-light: #172A45;
+            --accent: #D4AF37;       
+            --bg-body: #F8FAFC;      
+            --white: #FFFFFF;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border: #E2E8F0;
+            --success: #10B981;
+            --danger: #EF4444;
+            --shadow-md: 0 10px 20px -3px rgba(10,25,47,0.1);
+            --shadow-lg: 0 20px 30px -5px rgba(10,25,47,0.15);
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-body); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+
+        /* --- HEADER --- */
+        header { background: var(--white); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow-md); border-bottom: 4px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
+        .logo-area { display: flex; align-items: center; gap: 20px; }
+        .logo-area img { height: 75px; }
+        .inst-info h1 { color: var(--primary); font-size: 1.9rem; font-weight: 900; font-family: 'Playfair Display', serif; margin-bottom: 3px; letter-spacing: 1px;}
+        .inst-info p { color: var(--text-muted); font-size: 0.95rem; font-weight: 600; }
+        .dev-badge { background: var(--primary); color: var(--accent); padding: 4px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-top: 8px; display: inline-block; letter-spacing: 1px;}
+
+        .nav-buttons { display: flex; gap: 15px; }
+        .btn { padding: 12px 24px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: 0.3s; border: none; display: flex; align-items: center; gap: 8px; font-family: inherit;}
+        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: var(--primary); color: var(--white); box-shadow: var(--shadow-md); }
+        .btn-gold { background: var(--accent); color: var(--primary); }
+        .btn-gold:hover { filter: brightness(0.9); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .btn-primary { background: var(--primary); color: var(--white); }
+        .btn-primary:hover { background: var(--primary-light); transform: translateY(-2px); }
+        .btn-danger { background: var(--danger); color: white; }
+
+        /* --- CONTAINERS --- */
+        .container { max-width: 1400px; margin: 40px auto; padding: 0 20px; flex: 1; width: 100%; }
+        .panel { display: none; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- HOME PAGE --- */
+        .hero-banner { background: linear-gradient(135deg, rgba(10, 25, 47, 0.95), rgba(23, 42, 69, 0.85)), url('lakshya-picture.jpg') center/cover; border-radius: var(--radius); padding: 100px 40px; text-align: center; color: var(--white); margin-bottom: 60px; box-shadow: var(--shadow-lg); }
+        .hero-banner h2 { font-size: 3.5rem; font-weight: 900; font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 25px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);}
+        .hero-banner p { font-size: 1.25rem; color: #f1f5f9; max-width: 850px; margin: 0 auto 40px auto; line-height: 1.8; font-weight: 500;}
+        .stats-row { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px; }
+        .stat-box { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px 35px; border-radius: 12px; width: 220px; transition: 0.3s;}
+        .stat-box:hover { transform: translateY(-10px); background: rgba(255,255,255,0.15); }
+        .stat-box h3 { font-size: 2.8rem; color: var(--accent); margin-bottom: 5px; font-weight: 800;}
+        .stat-box p { font-weight: 600; font-size: 0.95rem; text-transform: uppercase; color:var(--white);}
+
+        .sec-header { margin: 60px 0 30px 0; border-left: 6px solid var(--accent); padding-left: 15px; }
+        .sec-header h2 { font-size: 2rem; color: var(--primary); font-weight: 800; font-family: 'Playfair Display', serif;}
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; margin-bottom: 60px; }
+        .card { background: var(--white); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow-md); border: 1px solid var(--border); }
+        .card h3 { color: var(--primary); font-size: 1.6rem; margin-bottom: 20px; font-weight: 800;}
+
+        /* Notice Board */
+        .notice-container { height: 300px; overflow: hidden; position: relative; background: #f8fafc; border-radius: 8px; padding: 20px; border: 1px solid var(--border); }
+        .notice-item { background: var(--white); padding: 15px 20px; border-left: 5px solid var(--accent); border-radius: 6px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); font-weight: 500; font-size: 1.05rem; line-height: 1.5;}
+        .notice-date { color: var(--primary); font-size: 0.85rem; font-weight: 800; margin-bottom: 8px; display: block; text-transform: uppercase; }
+
+        .director-box { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .director-img { width: 160px; height: 160px; object-fit: cover; border-radius: 50%; border: 5px solid var(--accent); margin-bottom: 20px; box-shadow: var(--shadow-md); }
+
+        .gallery { display: flex; gap: 20px; overflow-x: auto; padding: 20px 0; scroll-behavior: smooth; }
+        .gallery img { height: 250px; border-radius: var(--radius); box-shadow: var(--shadow-md); border: 3px solid var(--white); transition: 0.3s; }
+        .gallery img:hover { transform: scale(1.03); border-color: var(--accent); }
+
+        /* --- DASHBOARD STYLES --- */
+        .dash-layout { display: flex; gap: 40px; min-height: 75vh; }
+        .sidebar { width: 280px; background: var(--white); border-radius: var(--radius); padding: 30px 20px; box-shadow: var(--shadow-md); display: flex; flex-direction: column; gap: 8px; height: fit-content; border: 1px solid var(--border); }
+        .sidebar h3 { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 10px 10px; font-weight: 800;}
+        .side-btn { background: transparent; color: var(--primary); border: none; padding: 14px 18px; border-radius: 8px; text-align: left; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: inherit; }
+        .side-btn:hover { background: var(--bg-body); color: var(--accent); padding-left: 25px; }
+        .side-btn.active { background: var(--primary); color: var(--white); box-shadow: var(--shadow-md);}
+        .content-area { flex: 1; background: var(--white); border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow-md); border: 1px solid var(--border); overflow-x: auto; }
+
+        /* --- CONTROLS & FORMS --- */
+        .controls { background: var(--bg-body); padding: 25px; border-radius: 12px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; border: 1px solid var(--border); margin-bottom: 30px;}
+        .controls label { font-weight: 800; color: var(--primary); font-size: 0.85rem; text-transform: uppercase; }
+        input, select, textarea { padding: 12px 15px; border: 2px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 1rem; outline: none; transition: 0.3s; color: var(--primary); font-weight: 600; }
+        input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15); }
+
+        /* Web Tables */
+        table.data-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; margin-top: 15px; }
+        table.data-table th { background: var(--primary); color: var(--white); padding: 15px 12px; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; border: 1px solid var(--primary-light);}
+        table.data-table td { border: 1px solid var(--border); padding: 12px; text-align: center; font-weight: 500;}
+        table.data-table tr:nth-child(even) td { background: var(--bg-body); }
+        .editable-input { width: 100%; text-align: center; padding: 8px; border: 1px solid #ccc; border-radius: 6px; font-weight: 700; color: var(--primary); font-size: 1rem; background: transparent;}
+        .editable-input:focus { border-color: var(--accent); background: white;}
+        
+        /* BLUE SIGNATURE PEN */
+        .sign-cell { font-family: 'Caveat', cursive; color: #0000FF; font-size: 2.2rem; cursor: text; transform: rotate(-3deg); font-weight: 700; text-align: center; background: transparent;}
+
+        /* --- MODAL --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 25, 47, 0.85); backdrop-filter: blur(8px); z-index: 2000; display: none; align-items: center; justify-content: center; }
+        .modal-box { background: var(--white); padding: 45px 40px; border-radius: 20px; width: 420px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); text-align: center; border-top: 8px solid var(--accent);}
+
+        footer { background: var(--primary); color: #cbd5e1; text-align: center; padding: 40px 20px; margin-top: auto; }
+
+        /* =========================================================
+           100% BULLETPROOF PRINT STYLES (NO GAPS, PERFECT OVERLAPS)
+           ========================================================= */
+        @media print {
+            @page { size: A4 portrait; margin: 10mm; }
+            
+            /* Hide UI Elements & Reset Body */
+            body > *:not(#admin-panel) { display: none !important; }
+            html, body { background: white !important; margin: 0 !important; padding: 0 !important; color: black !important; }
+            
+            /* Hide non-print elements */
+            .no-print, header, footer, .sidebar, .controls, button, .hero-banner, .page-section, .modal-overlay { display: none !important; }
+            
+            /* Reset Layout containers to static to avoid overlapping/cutting */
+            #admin-panel, .dash-layout, .content-area { 
+                display: block !important; width: 100% !important; max-width: 100% !important; 
+                margin: 0 !important; padding: 0 !important; border: none !important; box-shadow: none !important; 
+                position: static !important; float: none !important;
+            }
+
+            /* --- PRINT LOGIC CONTROL VIA BODY CLASSES --- */
+            body.print-mode-report #admin-tool-container { display: block !important; position: static !important; }
+            body.print-mode-report #progress-card-area, body.print-mode-report #exp-cert-area, body.print-mode-report #admin-welcome { display: none !important; }
+
+            body.print-mode-card #progress-card-area { display: block !important; position: static !important; }
+            body.print-mode-card #admin-tool-container, body.print-mode-card #exp-cert-area, body.print-mode-card #admin-welcome { display: none !important; }
+
+            body.print-mode-expcert #exp-cert-area { display: block !important; position: static !important; }
+            body.print-mode-expcert #admin-tool-container, body.print-mode-expcert #progress-card-area, body.print-mode-expcert #admin-welcome { display: none !important; }
+
+            /* --- PROGRESS CARD SPECIFIC PRINT STYLES --- */
+            .cert-page {
+                border: 4px solid #0A192F !important;
+                outline: 2px solid #D4AF37 !important;
+                outline-offset: -8px !important;
+                padding: 25px !important;
+                background: white !important;
+                page-break-after: always !important;
+                box-sizing: border-box !important;
+                min-height: 270mm !important;
+            }
+            .cert-page:last-child { page-break-after: auto !important; }
+            
+            .pc-header-flex { display: flex !important; align-items: center !important; justify-content: space-between !important; border-bottom: 3px double #000 !important; padding-bottom: 10px !important; margin-bottom: 15px !important; }
+            .pc-header-text h1 { font-family: 'Playfair Display', serif !important; font-size: 26px !important; margin: 0 !important; color: black !important; text-transform: uppercase;}
+            .pc-header-text p { font-size: 11px !important; font-weight: bold !important; margin: 3px 0 !important; color: black !important;}
+            .pc-header-text h2 { font-size: 16px !important; background: transparent !important; color: black !important; border: 1px solid black !important; padding: 4px 15px !important; border-radius: 20px !important; display: inline-block !important; margin-top: 5px !important;}
+            
+            .pc-info-box { display: flex !important; justify-content: space-between !important; background: transparent !important; border: 1px solid #000 !important; padding: 10px !important; border-radius: 0 !important; font-size: 12px !important; margin-bottom: 15px !important; }
+
+            /* PROGRESS CARD TABLE - Fixed Column Widths applied perfectly */
+            table.cert-table { width: 100% !important; border-collapse: collapse !important; margin-top: 10px !important; table-layout: fixed !important; page-break-inside: auto !important;}
+            tr { page-break-inside: avoid !important; }
+            table.cert-table th, table.cert-table td { border: 1px solid black !important; padding: 4px 6px !important; height: 18px !important; font-size: 11px !important; color: black !important; font-weight: bold !important; word-wrap: break-word !important;}
+            table.cert-table th { background-color: #f1f5f9 !important; -webkit-print-color-adjust: exact; text-transform: uppercase; text-align: center;}
+            
+            /* Table Column Overrides for Printing */
+            table.cert-table th:nth-child(1), table.cert-table td:nth-child(1) { width: 5% !important; text-align: center !important; }
+            table.cert-table th:nth-child(2), table.cert-table td:nth-child(2) { width: 60% !important; text-align: left !important; padding-left: 5px !important; }
+            table.cert-table th:nth-child(3), table.cert-table td:nth-child(3) { width: 8% !important; text-align: center !important; }
+            table.cert-table th:nth-child(4), table.cert-table td:nth-child(4) { width: 12% !important; text-align: center !important; }
+            table.cert-table th:nth-child(5), table.cert-table td:nth-child(5) { width: 15% !important; text-align: center !important; }
+
+            .sign-cell { font-family: 'Caveat', cursive !important; font-size: 20px !important; color: #0000FF !important; -webkit-print-color-adjust: exact; transform: rotate(-3deg) !important; text-align: center;}
+            .editable-input { border: none !important; color: black !important; font-weight: bold !important; background: transparent !important; }
+            .print-pc-footer { margin-top: 40px; display: flex; justify-content: space-between; font-weight: bold !important; font-size: 14px !important; color: black !important; page-break-inside: avoid;}
+
+            /* --- EXPERIENCE CERTIFICATE PRINT STYLES (LETTERHEAD) --- */
+            .print-exp-page {
+                padding-top: 3in !important; /* PERFECT 3 INCH TOP MARGIN FOR LETTERHEAD */
+                padding-left: 15mm !important;
+                padding-right: 15mm !important;
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+            }
+            .hide-on-print { display: none !important; } /* Hides Title, Ref and Date headers */
+
+            /* --- REPORT TABLE PRINT STYLES --- */
+            .report-print-area { padding: 10px; }
+            .report-print-area h2 { text-align: center; border-bottom: 2px solid black; padding-bottom: 10px; margin-bottom: 20px; }
+            .report-print-table { width: 100%; border-collapse: collapse; font-size: 11px !important; }
+            .report-print-table th, .report-print-table td { border: 1px solid black !important; padding: 5px !important; text-align: center; color: black !important;}
+            .report-print-table th { background-color: #eee !important; -webkit-print-color-adjust: exact; font-weight: bold !important; text-transform: uppercase;}
+        }
+    </style>
+</head>
+<body>
+
+    <header class="no-print">
+        <div class="logo-area">
+            <div class="logo-box">LI</div>
+            <div class="inst-info">
+                <h1>LAKSHYA PRIVATE ITI</h1>
+                <p>Govt. of India | Affiliation: DGET-6/4/85/2016-TC</p>
+                <div class="dev-badge">Developed by Ankit Singh</div>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button class="btn btn-outline" onclick="showLogin('student')">👨‍🎓 Student</button>
+            <button class="btn btn-outline" onclick="showLogin('staff')">👨‍🏫 Staff</button>
+            <button class="btn btn-gold" onclick="showLogin('admin')">🔒 Admin Area</button>
+        </div>
+    </header>
+
+    <div id="home-section" class="container panel" style="display:block;">
+        
+        <div class="hero-banner">
+            <h2>Shaping Careers, Building the Nation</h2>
+            <p>Welcome to Bihar's premier technical institute. We provide industry-aligned training, state-of-the-art workshops, and 100% placement support to secure your bright future.</p>
+            <div class="stats-row">
+                <div class="stat-box"><h3>1500+</h3><p>Alumni Placed</p></div>
+                <div class="stat-box" style="border-color:var(--accent); background:rgba(212, 175, 55, 0.15); transform:scale(1.05); box-shadow:0 10px 30px rgba(0,0,0,0.2);">
+                    <h3 style="color:var(--accent);">100%</h3><p style="color:white;">Job Assistance</p>
+                </div>
+                <div class="stat-box"><h3>20+</h3><p>Expert Instructors</p></div>
+            </div>
+        </div>
+
+        <div class="page-section">
+            <div class="sec-header"><h2>Explore Premium Trades</h2></div>
+            <div class="grid-2">
+                <div class="card" style="border-left: 6px solid var(--primary-light);">
+                    <h3>🛠️ Fitter (NSQF Level 5)</h3>
+                    <p style="color:var(--text-muted); margin-bottom:20px; font-size:1.05rem;">Master mechanical assembling, precision measurement, lathe operations, and advanced welding techniques. Perfect for heavy industries and manufacturing sectors.</p>
+                    <span style="background:var(--bg-body); padding:8px 15px; border-radius:6px; font-weight:800; color:var(--primary); font-size:0.9rem;">Duration: 2 Yrs | Eligibility: 10th Pass</span>
+                </div>
+                <div class="card" style="border-left: 6px solid var(--accent);">
+                    <h3>⚡ Electrician (NSQF Level 5)</h3>
+                    <p style="color:var(--text-muted); margin-bottom:20px; font-size:1.05rem;">Learn industrial wiring, AC/DC motor winding, power distribution, and fault troubleshooting. Extremely high demand globally in all power sectors.</p>
+                    <span style="background:var(--bg-body); padding:8px 15px; border-radius:6px; font-weight:800; color:var(--primary); font-size:0.9rem;">Duration: 2 Yrs | Eligibility: 10th Pass</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-section">
+            <div class="sec-header"><h2>Campus Updates & Info</h2></div>
+            <div class="grid-2">
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <div style="background:var(--primary); color:white; padding:20px 25px;"><h3 style="margin:0; color:white; font-size:1.3rem;">📢 Digital Notice Board</h3></div>
+                    <div class="notice-container">
+                        <marquee direction="up" scrollamount="3" height="260px" id="notice-container-marquee">
+                            <div class="notice-item"><span class="notice-date">System Notice</span>Welcome to LAKSHYA PRIVATE ITI! New session details will be updated here.</div>
+                        </marquee>
+                    </div>
+                </div>
+                <div class="card director-box">
+                    <img src="director.JPG" alt="Director" class="director-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/160x160?text=Director'">
+                    <h3 style="color:var(--primary); font-size:1.8rem; font-weight:800; margin-bottom:5px;">Anjum Kumari</h3>
+                    <p style="color:var(--accent); font-weight:800; font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:20px;">Managing Director</p>
+                    <p style="font-style:italic; color:var(--text-muted); font-size:1.1rem; line-height:1.7; max-width:900px; margin:0 auto;">"Education is the passport to the future. At Lakshya ITI, we don't just teach skills; we build confidence and solid careers. Welcome to our family."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-section">
+            <div class="sec-header"><h2>📸 Campus Gallery</h2></div>
+            <div class="gallery">
+                <img src="lakshya-picture.jpg" alt="Campus" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Campus'">
+                <img src="classroom.jpeg" alt="Classroom" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Classroom'">
+                <img src="jyotilab.jpg" alt="Lab" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Lab'">
+                <img src="jyotiworkshop.jpg" alt="Workshop" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x200?text=Workshop'">
+            </div>
+        </div>
+    </div>
+
+    <div id="student-panel" class="container panel no-print">
+        <div class="sec-header"><h2 style="margin:0;">👨‍🎓 Student Dashboard</h2></div>
+        <div class="card" style="margin-bottom:30px; background:var(--primary); color:white; display:flex; justify-content:space-between; align-items:center; border-left:8px solid var(--accent); padding:25px;">
+            <div>
+                <h3 style="margin:0; color:white; font-size:2rem;" id="st-dash-name">Name</h3>
+                <p style="margin:5px 0 0 0; color:#cbd5e1; font-weight:600; font-size:1.1rem;">Roll: <span id="st-dash-roll" style="color:var(--accent);"></span> | Batch: <span id="st-dash-trade" style="color:var(--accent);"></span></p>
+            </div>
+            <button class="btn btn-outline" style="border-color:white; color:white;" onclick="logout()">Logout</button>
+        </div>
+
+        <div class="card" style="margin-bottom:30px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--border); padding-bottom:15px; margin-bottom:20px;">
+                <h3 style="margin:0;">📊 My Academic Records</h3>
+                <button class="btn btn-primary" onclick="fetchStudentPersonalData()">🔄 Refresh Data</button>
+            </div>
+            <div id="st-marks-display" style="overflow-x:auto;">
+                <p style="color:var(--text-muted); font-size:1.1rem;">Click 'Refresh Data' to securely fetch your records from the server.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="border-bottom:2px solid var(--border); padding-bottom:15px; margin-bottom:20px;">📚 Study Material Downloads</h3>
+            <table class="data-table" id="material-table">
+                <thead><tr><th>Year</th><th>Trade</th><th>Subject</th><th>Action</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="staff-panel" class="container panel no-print">
+        <div class="dash-layout">
+            <div class="sidebar">
+                <h2 style="font-size:1.6rem; margin-bottom:20px; color:var(--primary);">Staff Portal</h2>
+                <h3>Daily Tasks</h3>
+                <button class="side-btn active" onclick="openEntryTool('attendance')">📅 Mark Attendance</button>
+                <h3 style="margin-top:auto;">Account</h3>
+                <button class="side-btn" style="color:var(--danger);" onclick="logout()">🚪 Secure Logout</button>
+            </div>
+            <div class="content-area" id="staff-content-area">
+                <div id="staff-entry-area">
+                    <h2 style="color:var(--primary); font-size:2.2rem; margin-bottom:20px;">Welcome, <span id="staff-name-display" style="color:var(--primary-light);">Instructor</span></h2>
+                    <p style="font-size:1.2rem; background:var(--bg-body); padding:20px; border-radius:12px; display:inline-block; font-weight:700; border:1px solid var(--border);">
+                        Trade Assigned: <span id="staff-trade-display" style="color:var(--accent);"></span>
+                    </p>
+                    <p style="color:var(--text-muted); font-size:1.1rem; margin-top:20px;">Select 'Mark Attendance' from the menu to begin.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-panel" class="container panel">
+        <div class="dash-layout">
+            <div class="sidebar no-print">
+                <div style="background:var(--primary); color:white; padding:15px; border-radius:8px; margin-bottom:15px; text-align:center;">
+                    <h2 style="font-size:1.4rem; margin:0; font-family:'Playfair Display', serif;">Admin Hub</h2>
+                </div>
+                
+                <h3>Data Entry</h3>
+                <button class="side-btn" onclick="openEntryTool('monthly')">📊 Monthly Marks</button>
+                <button class="side-btn" onclick="openEntryTool('quarterly')">📈 Quarterly Marks</button>
+                <button class="side-btn" onclick="openEntryTool('job')">🛠️ Job Evolution</button>
+                <button class="side-btn" onclick="openAdminTool('notice')">📢 Publish Notice</button>
+                
+                <h3>Reports Library</h3>
+                <button class="side-btn" onclick="openAdminTool('history_attendance')">📅 Attendance</button>
+                <button class="side-btn" onclick="openAdminTool('history_monthly')">📋 Monthly Marks</button>
+                <button class="side-btn" onclick="openAdminTool('history_quarterly')">📑 Quarterly Marks</button>
+                <button class="side-btn" onclick="openAdminTool('history_job')">📈 Job Evolution</button>
+                
+                <h3>Certificates</h3>
+                <button class="side-btn" style="color:var(--accent); font-weight:800;" onclick="setupProgressCard('Fitter')">🖨️ Fitter Card</button>
+                <button class="side-btn" style="color:var(--accent); font-weight:800;" onclick="setupProgressCard('Electrician')">🖨️ Elect. Card</button>
+                <button class="side-btn" style="color:var(--success); font-weight:800;" onclick="setupExpCert()">📜 Staff Exp. Cert</button>
+
+                <h3>System Config</h3>
+                <button class="side-btn" onclick="openManageStaff()">👥 Manage Staff</button>
+                <button class="side-btn" style="color:var(--danger);" onclick="openSettings()">⚙️ Security</button>
+                <button class="side-btn" style="margin-top:10px; border-top:1px solid var(--border);" onclick="logout()">🚪 Logout</button>
+            </div>
+            
+            <div class="content-area" id="admin-content-area">
+                <div id="admin-welcome" style="text-align:center; padding:80px 20px;">
+                    <span style="font-size:5rem;">🛡️</span>
+                    <h1 style="color:var(--primary); font-size:3rem; margin-top:20px; font-weight:800;">System Dashboard</h1>
+                    <p style="color:var(--text-muted); font-size:1.2rem; font-weight:500;">Select a module from the sidebar to manage institution operations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="entry-tool-container" style="display:none;">
+        <h2 id="tool-title" style="color:var(--primary); margin-bottom:25px; font-size:2rem; border-bottom:4px solid var(--accent); padding-bottom:10px; display:inline-block;">Tool Name</h2>
+        
+        <div class="controls no-print">
+            <div><label>Session:</label><br>
+                <select id="tool-session">
+                    <option value="2024-26">2024-26</option>
+                    <option value="2025-27" selected>2025-27</option>
+                    <option value="2026-28">2026-28</option>
+                    <option value="2027-29">2027-29</option>
+                    <option value="2028-30">2028-30</option>
+                    <option value="2029-31">2029-31</option>
+                    <option value="2030-32">2030-32</option>
+                    <option value="2031-33">2031-33</option>
+                </select>
+            </div>
+            <div><label>Trade:</label><br><select id="tool-trade"><option value="Fitter">Fitter</option><option value="Electrician">Electrician</option></select></div>
+            <div><label>Unit:</label><br><select id="tool-unit" style="width:80px;"><option value="1">1</option><option value="2">2</option></select></div>
+
+            <div id="date-input-div" style="display:none;"><label>Date:</label><br><input type="date" id="tool-date"></div>
+            <div id="month-input-div" style="display:none;"><label>Month:</label><br>
+                <select id="tool-month"><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select>
+            </div>
+            <div id="quarter-input-div" style="display:none;"><label>Quarter:</label><br>
+                <select id="tool-quarter"><option>Q1</option><option>Q2</option><option>Q3</option><option>Q4</option><option>Q5</option><option>Q6</option><option>Q7</option><option>Q8</option></select>
+            </div>
+            <div id="week-input-div" style="display:none;"><label>Week:</label><br><select id="tool-week"></select></div>
+
+            <button class="btn btn-primary" style="margin-top:20px; margin-left:auto;" onclick="loadStudentListForTool()">📥 Fetch Students</button>
+        </div>
+
+        <form id="data-entry-form">
+            <div style="overflow-x:auto; border-radius:var(--radius); border:1px solid var(--border);"><table id="entry-table" class="data-table" style="margin:0;"></table></div>
+            <button type="button" class="btn btn-success no-print" style="width:100%; justify-content:center; padding:18px; font-size:1.2rem; margin-top:25px;" onclick="submitStaffData()">📤 SECURE & UPLOAD DATA</button>
+        </form>
+    </div>
+
+    <div id="admin-tools-wrapper" style="display:none;">
+        <div id="admin-tool-container" style="display:none;">
+            <div class="no-print" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;">
+                <h2 id="history-title" style="margin:0; color:var(--primary); font-size:2rem; border-bottom:4px solid var(--accent); padding-bottom:5px;">Report Viewer</h2>
+                <button class="btn btn-outline" onclick="executeSafePrint('report')">🖨️ Print Document</button>
+            </div>
+            
+            <div id="admin-filters" class="controls no-print">
+                <div><label>Session:</label><br><select id="history-session">
+                    <option value="2024-26">2024-26</option><option value="2025-27" selected>2025-27</option><option value="2026-28">2026-28</option>
+                    <option value="2027-29">2027-29</option><option value="2028-30">2028-30</option><option value="2029-31">2029-31</option>
+                    <option value="2030-32">2030-32</option><option value="2031-33">2031-33</option>
+                </select></div>
+                <div><label>Trade:</label><br><select id="admin-trade"><option value="Fitter">Fitter</option><option value="Electrician">Electrician</option></select></div>
+                <div><label>Unit:</label><br><select id="admin-unit" style="width:80px;"><option value="1">1</option><option value="2">2</option></select></div>
+                
+                <span id="history-date-span" style="display:none;"><label>Date:</label><br><input type="date" id="history-date"></span>
+                <span id="history-month-span" style="display:none;"><label>Month:</label><br><select id="history-month"><option value="">All</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select></span>
+                <span id="history-quarter-span" style="display:none;"><label>Quarter:</label><br><select id="history-quarter"><option value="">All</option><option>Q1</option><option>Q2</option><option>Q3</option><option>Q4</option><option>Q5</option><option>Q6</option><option>Q7</option><option>Q8</option></select></span>
+                <span id="history-week-span" style="display:none;"><label>Week:</label><br><select id="history-week"></select></span>
+
+                <button class="btn btn-primary" style="margin-top:20px; margin-left:auto;" onclick="loadAdminHistory()">🔍 Filter Data</button>
+            </div>
+
+            <div id="notice-form-area" style="display:none; background:var(--bg-body); padding:30px; border-radius:var(--radius); border:1px solid var(--border);" class="no-print">
+                <label style="font-weight:800; font-size:1.1rem;">Notice Title:</label><input type="text" id="notice-title" placeholder="Enter title..." style="width:100%; margin-bottom:20px;"><br>
+                <label style="font-weight:800; font-size:1.1rem;">Notice Content:</label><textarea id="notice-content" rows="6" placeholder="Write details here..." style="width:100%; resize:vertical;"></textarea><br>
+                <button class="btn btn-primary" style="margin-top:20px;" onclick="publishNotice()">📢 Publish Now</button>
+            </div>
+
+            <div id="admin-result-area" style="overflow-x:auto;"></div>
+        </div>
+
+        <div id="progress-card-area" style="display:none;">
+            <div class="controls no-print">
+                <div><label>Session:</label><br><select id="pc-session-select">
+                    <option value="2024-26">2024-26</option><option value="2025-27" selected>2025-27</option><option value="2026-28">2026-28</option>
+                    <option value="2027-29">2027-29</option><option value="2028-30">2028-30</option><option value="2029-31">2029-31</option>
+                    <option value="2030-32">2030-32</option><option value="2031-33">2031-33</option>
+                </select></div>
+                <div><label>Student Roll No:</label><br><input type="number" id="pc-roll" placeholder="Ex: 1" style="width:120px;"></div>
+                <button class="btn btn-gold" style="margin-top:20px; margin-left:auto;" onclick="generateProgressCard()">⚙️ Generate Card</button>
+                <button class="btn btn-primary" style="margin-top:20px;" onclick="executeSafePrint('card')">🖨️ Print Final</button>
+            </div>
+            
+            <div id="pc-content">
+                <div class="cert-page">
+                    <div class="pc-header-flex">
+                        <div style="width:15%;"><img src="skill.png" style="width:70px;" onerror="this.style.display='none'"></div>
+                        <div class="pc-header-text">
+                            <h1>LAKSHYA PRIVATE I.T.I</h1>
+                            <p>Recognized by NCVT, DGT, Ministry of Skill Development, Govt. of India</p>
+                            <p style="font-weight:normal;">Rosera, Samastipur, Bihar - 848210 | Affiliation No: DGET-6/4/85/2016-TC</p>
+                            <h2>PROGRESS CARD - PART 1</h2>
+                        </div>
+                        <div style="width:15%;"></div>
+                    </div>
+                    
+                    <div class="pc-info-box">
+                        <div style="width:48%; line-height:1.8;">
+                            <strong>Name of Trainee:</strong> <span id="pc-name-1" style="font-weight:800; text-transform:uppercase; border-bottom:1px dotted #000; padding:0 5px;">...</span><br>
+                            <strong>Roll No:</strong> <span id="pc-roll-display-1" style="font-weight:800; border-bottom:1px dotted #000; padding:0 5px;"></span>
+                        </div>
+                        <div style="width:48%; text-align:right; line-height:1.8;">
+                            <strong>Trade:</strong> <span id="pc-trade-1" style="font-weight:800; text-transform:uppercase; border-bottom:1px dotted #000; padding:0 5px;">...</span><br>
+                            <strong>Session:</strong> <span id="pc-session-display-1" style="font-weight:800; border-bottom:1px dotted #000; padding:0 5px;"></span>
+                        </div>
+                    </div>
+                    
+                    <table class="cert-table">
+                        <colgroup>
+                            <col style="width: 5%;">
+                            <col style="width: 60%;">
+                            <col style="width: 8%;">
+                            <col style="width: 12%;">
+                            <col style="width: 15%;">
+                        </colgroup>
+                        <thead>
+                            <tr><th>Wk</th><th style="text-align:left; padding-left:10px;">Exercise Done During The Week</th><th>Grade</th><th>Inst. Sign</th><th>Remarks</th></tr>
+                        </thead>
+                        <tbody id="pc-tbody-1"></tbody>
+                    </table>
+                </div>
+
+                <div class="cert-page">
+                    <div class="pc-header-flex" style="border-bottom:none; margin-bottom:5px; justify-content:center;">
+                        <div class="pc-header-text">
+                            <h2 style="margin-top:0;">PROGRESS CARD - PART 2</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="pc-info-box" style="margin-bottom:15px; padding:10px 15px;">
+                        <div><strong>Name:</strong> <span id="pc-name-2" style="text-transform:uppercase; font-weight:800;">...</span></div>
+                        <div><strong>Roll No:</strong> <span id="pc-roll-display-2" style="font-weight:800;"></span></div>
+                    </div>
+
+                    <table class="cert-table">
+                        <colgroup>
+                            <col style="width: 5%;">
+                            <col style="width: 60%;">
+                            <col style="width: 8%;">
+                            <col style="width: 12%;">
+                            <col style="width: 15%;">
+                        </colgroup>
+                        <thead>
+                            <tr><th>Wk</th><th style="text-align:left; padding-left:10px;">Exercise Done During The Week</th><th>Grade</th><th>Inst. Sign</th><th>Remarks</th></tr>
+                        </thead>
+                        <tbody id="pc-tbody-2"></tbody>
+                    </table>
+                    
+                    <div class="print-pc-footer">
+                        <div style="text-align:center; padding-top:30px;">_______________________<br><br>Trade Instructor</div>
+                        <div style="text-align:center; padding-top:30px;">_______________________<br><br>Principal</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="exp-cert-area" style="display:none;">
+            <div class="controls no-print" style="background:var(--white); box-shadow:var(--shadow-sm);">
+                <div style="width: 100%; display:flex; gap: 15px; flex-wrap: wrap;">
+                    <div style="flex:1; min-width: 200px;"><label>Teacher Full Name:</label><br><input type="text" id="exc-name" placeholder="E.g., Ankit Singh" style="width:100%;"></div>
+                    <div style="flex:1; min-width: 200px;"><label>Father's Name:</label><br><input type="text" id="exc-fname" placeholder="E.g., Rajesh Singh" style="width:100%;"></div>
+                    <div style="flex:1; min-width: 200px;"><label>Designation & Trade:</label><br>
+                        <select id="exc-desig" style="width:100%;">
+                            <option value="INSTRUCTOR (Fitter Trade)">Instructor (Fitter)</option>
+                            <option value="INSTRUCTOR (Electrician Trade)">Instructor (Electrician)</option>
+                            <option value="WORKSHOP INSTRUCTOR (Fitter Trade)">Workshop Instructor (Fitter)</option>
+                            <option value="WORKSHOP INSTRUCTOR (Electrician Trade)">Workshop Instructor (Electrician)</option>
+                            <option value="PRINCIPAL">Principal</option>
+                            <option value="COMPUTER OPERATOR">Computer Operator</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="width:100%; margin-top: 15px; border-top: 1px solid var(--border); padding-top: 15px;">
+                    <label style="display:block; margin-bottom:10px; color:var(--primary);">EMPLOYMENT PERIOD(S):</label>
+                    <div id="date-periods-container">
+                        <div class="date-period" style="display:flex; gap:10px; align-items:center; margin-bottom:10px;">
+                            <span>From:</span><input type="date" class="exc-from">
+                            <span>To:</span><input type="text" class="exc-to" placeholder="Date or 'till date'" value="till date">
+                        </div>
+                    </div>
+                    <button class="btn btn-outline" style="padding:6px 12px; font-size:0.8rem;" onclick="addDatePeriod()">+ Add Another Period</button>
+                </div>
+                
+                <div style="width:100%; display:flex; justify-content:flex-end; gap:15px; margin-top:20px;">
+                    <div style="flex:1; min-width: 150px; max-width:200px; margin-right:auto;"><label>Ref No:</label><br><input type="text" id="exc-ref" value="ITI/EC/2026/01" style="width:100%; padding:6px;"></div>
+                    <div style="flex:1; min-width: 150px; max-width:200px; margin-right:auto;"><label>Issue Date:</label><br><input type="date" id="exc-date" style="width:100%; padding:6px;"></div>
+                    <button class="btn btn-gold" onclick="generateExpCert()">⚙️ Show Certificate</button>
+                    <button class="btn btn-primary" onclick="executeSafePrint('expcert')">🖨️ Print on Letterhead</button>
+                </div>
+            </div>
+
+            <div id="exc-content" style="display:none;">
+                <div class="print-exp-page" style="background: white; padding: 40px; margin-top:20px; border: 1px solid #ccc;">
+                    
+                    <div class="hide-on-print" style="text-align:center; margin-bottom:30px;">
+                        <h2 style="font-family:'Georgia', serif; font-size:26px; text-decoration:underline; color:#0A192F; font-weight:bold;">EXPERIENCE CERTIFICATE</h2>
+                    </div>
+
+                    <div class="hide-on-print" style="display:flex; justify-content:space-between; font-weight:700; font-size:15px; margin-bottom:40px; color:#000;">
+                        <div>Ref. No: <span id="exc-ref-display"></span></div>
+                        <div>Date: <span id="exc-date-display"></span></div>
+                    </div>
+
+                    <div style="text-align:center; font-weight:bold; font-size:16px; margin-bottom:20px; color:#000;">
+                        TO WHOMSOEVER IT MAY CONCERN
+                    </div>
+
+                    <div style="font-size:16px; line-height:2; text-align:justify; color:#000; font-family:'Georgia', serif;">
+                        <p style="margin-bottom:15px;">
+                            This is to certify that <strong>Mr./Ms. <span id="exc-name-display" style="text-transform:uppercase;">__________</span></strong>, 
+                            S/o Sh. <strong><span id="exc-fname-display">__________</span></strong>, has been employed as an 
+                            <strong><span id="exc-desig-display">__________</span></strong> at Lakshya Private Industrial Training Institute (ITI), Rosera, Bihar.
+                        </p>
+                        <p style="margin-bottom:15px;">
+                            He/She worked diligently with this institute <span id="exc-periods-display">from <strong>__________</strong> to <strong>__________</strong></span>.
+                        </p>
+                        <p style="margin-bottom:20px;">
+                            During his/her tenure, the above-named proved to be a dedicated, knowledgeable, and responsible Instructor. 
+                            He/She has been instrumental in providing theoretical and practical training to students, maintaining high teaching standards, 
+                            and contributing significantly to the academic growth of the ITI. His/Her character, conduct, and professional performance have been exemplary.
+                        </p>
+                        <p style="font-weight:bold; font-size:16px; margin-top:20px;">
+                            We wish him/her the very best for future endeavors.
+                        </p>
+                    </div>
+
+                    <div style="margin-top:80px; display:flex; justify-content:flex-end; font-weight:bold; font-size:15px; color:#000; text-align:center;">
+                        <div style="text-align:center;">
+                            <div class="sign-ink" style="margin-bottom:5px; height:35px; font-family: 'Caveat', cursive; font-size: 24px; color: #0000FF; transform: rotate(-3deg);"></div>
+                            __________________________<br>
+                            Authorized Signatory<br>
+                            [Signature & Stamp]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="settings-area" style="display:none;" class="no-print">
+            <h2 class="section-title">⚙️ Admin Credentials</h2>
+            <div style="background:var(--white); padding:40px; border-radius:var(--radius); box-shadow:var(--shadow-md); border:1px solid var(--border); max-width:450px;">
+                <label style="font-weight:800;">New Admin ID:</label><input type="text" id="new-admin-id" autocomplete="off" style="width:100%; margin-bottom:20px;">
+                <label style="font-weight:800;">New Password:</label><input type="password" id="new-admin-pass" autocomplete="off" style="width:100%; margin-bottom:30px;">
+                <button class="btn btn-primary" style="width:100%; justify-content:center; padding:15px; font-size:1.1rem;" onclick="saveAdminCredentials()">💾 Save Changes</button>
+            </div>
+        </div>
+
+        <div id="manage-staff-area" style="display:none;" class="no-print">
+            <h2 class="section-title">👥 Staff Management</h2>
+            <div class="controls" style="background:var(--white); box-shadow:var(--shadow-sm);">
+                <div style="flex:1; min-width:200px;"><label>Username</label><input type="text" id="create-staff-user"></div>
+                <div style="flex:1; min-width:200px;"><label>Password</label><input type="password" id="create-staff-pass"></div>
+                <div style="flex:1; min-width:200px;"><label>Full Name</label><input type="text" id="create-staff-name"></div>
+                <div style="flex:1; min-width:150px;"><label>Assign Trade</label><select id="create-staff-trade"><option>Fitter</option><option>Electrician</option><option>Computer Operator</option></select></div>
+                <button class="btn btn-primary" style="height:48px; margin-top:20px;" onclick="createStaff()">➕ Add Staff</button>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin:30px 0 15px 0;"><h3 style="margin:0; font-size:1.4rem;">Active Staff List</h3><button class="btn btn-outline" onclick="loadStaffList()">🔄 Sync</button></div>
+            <div id="staff-list-display"></div>
+        </div>
+    </div>
+
+    <div id="login-modal" class="modal-overlay">
+        <div class="modal-box">
+            <div style="background:var(--accent); color:var(--white); width:80px; height:80px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:-80px auto 25px auto; border:6px solid var(--white); box-shadow:var(--shadow-md);">
+                <span style="font-size:36px;">🔐</span>
+            </div>
+            <h2 id="login-title" style="text-align:center; color:var(--primary); font-size:2.2rem; font-weight:800; margin-bottom:10px;">Login</h2>
+            <p style="color:var(--text-muted); margin-bottom:30px; font-weight:600;">Secure Portal Access</p>
+            
+            <div id="student-login-extras" style="display:none; text-align:left; background:var(--bg-body); padding:15px; border-radius:8px; margin-bottom:20px;">
+                <label style="font-weight:800; font-size:0.9rem; color:var(--primary);">Batch Session:</label>
+                <select id="login-session" style="width:100%; margin-bottom:15px; background:white;">
+                    <option value="2024-26">2024-26</option><option selected value="2025-27">2025-27</option>
+                    <option value="2026-28">2026-28</option><option value="2027-29">2027-29</option>
+                    <option value="2028-30">2028-30</option><option value="2029-31">2029-31</option>
+                    <option value="2030-32">2030-32</option><option value="2031-33">2031-33</option>
+                </select>
+                <label style="font-weight:800; font-size:0.9rem; color:var(--primary);">Trade:</label>
+                <select id="login-trade" style="width:100%; background:white;"><option>Fitter</option><option>Electrician</option></select>
+            </div>
+
+            <input type="text" id="login-id" placeholder="Enter ID / Roll No" autocomplete="off" style="width:100%; margin-bottom:15px;">
+            <input type="password" id="login-pass" placeholder="Enter Password" autocomplete="off" style="width:100%; margin-bottom:25px;">
+            <button class="btn btn-primary" style="width:100%; justify-content:center; padding:15px; font-size:1.1rem; margin-bottom:12px;" onclick="processLogin()">Authenticate</button>
+            <button class="btn btn-outline" style="width:100%; justify-content:center; color:var(--text-muted); border-color:var(--border);" onclick="document.getElementById('login-modal').style.display='none'">Cancel</button>
+        </div>
+    </div>
+
+    <footer class="no-print">
+        <h3 style="font-weight:800; font-size:1.6rem; color:white; margin:0 0 10px 0; font-family:'Playfair Display', serif; letter-spacing:1px;">LAKSHYA PRIVATE ITI</h3>
+        <p style="font-weight:500; font-size:1rem; color:#cbd5e1;">Affiliation: DGET-6/4/85/2016-TC | Address: Rosera, Samastipur, Bihar</p>
+        <p style="margin-top:25px; font-size:0.9rem; color:#cbd5e1; font-weight:600; opacity:0.8;">&copy; 2026 All Rights Reserved. Enterprise Portal</p>
+    </footer>
+
+    <script>
+        const API_URL = "https://script.google.com/macros/s/AKfycbw-0QubmPTZ9ksF0C8wZbn-x3quakLOyngM-iu-OJpjk96b7CWg_Cd2jY4HG2bay7pRnA/exec";
+
+        const FITTER_EXERCISES = {
+            1: "IMPORTANCE OF TRADE TRAINING, LIST OF TOOLS", 2: "SAFETY ATTITUDE DEVELOPMENT & PPE", 3: "FIRST AID METHOD", 4: "SAFE DISPOSAL OF WASTE", 5: "HAZARD IDENTIFICATION", 6: "SAFETY SIGN", 7: "PREVENTIVE MEASURES FOR ELECTRICAL ACCIDENTS", 8: "USES OF FIRE EXTINGUISHERS", 9: "DETAIL OF BENCH VICE", 10: "SAFE USE OF TOOLS", 11: "IDENTIFICATION OF TOOLS FOR MARKING", 12: "MARKING OUT LINES, GRIPPING", 13: "SAWING DIFFERENT METALS", 14: "FILING CHANNEL", 15: "FILING FLAT AND SQUARE", 16: "MARKING PRACTICE", 17: "CHECK USING TRY-SQUARE", 18: "FINDING CENTER OF ROUND BAR", 19: "CHIPPING, CHAMFERING", 20: "FILE STEPS AND FINISH", 21: "FILE RADIUS ALONG A MARKED LINE", 22: "MARK OFF AND DRILL", 23: "DRILL AND TAP ON M.S.", 24: "PRACTICE USE OF DIFFERENT PUNCHES", 25: "MARKING GEOMETRICAL SHAPES", 26: "PUNCH HOLES", 27: "DO LAP AND BUTT JOINTS", 28: "DRILL FOR RIVETING", 29: "MARK OFF AND DRILL HOLES", 30: "DRILL ON M.S FLAT", 31: "FILE RADIUS TO GAUGE", 32: "DRILL THROUGH HOLE", 33: "FILE AND MAKE STEP FIT", 34: "MAKE SIMPLE OPEN FITS", 35: "MAKE OPEN FITTING OF CURVES", 36: "MAKE INSIDE SQUARE FIT", 37: "FILE FIT - COMBINED", 38: "File internal angles", 39: "Scrap on flat surfaces", 40: "H FITTING", 41: "Precision drilling", 42: "Make dovetailed fitting", 43: "Make sliding diamond fitting", 44: "Scrape on internal surface", 45: "Pipes and pipe fittings", 46: "Dovetail pin assembly", 47: "Make sliding fits assembly", 48: "Make open fitting", 49: "Form internal threads", 50: "Shoulder turn", 51: "Sharpening tools", 52: "Cut grooves", 53: "MAKE A MANDREL", 54: "KNURL THE JOB", 55: "MAKE A BUSH STEP", 56: "TURN TAPER", 57: "TURN STANDARD TAPERS", 58: "PRACTICE THREADING", 59: "READ PRESSURE GAUGE", 60: "FACING AND CHAMFRING", 61: "STEP TURNING", 62: "PIPE BENDING", 63: "THREADING ON ROUND ROD", 64: "SQUARE ANGULAR MARKING", 65: "KEY WAY AND SLOTS", 66: "INTERNAL DOUBLE SQUARE", 67: "EXTERNAL RADIUS FITTING", 68: "AN INTERNAL CROSS FITTING", 69: "SLIDING FITTING", 70: "INTERNAL HEAD AND TAIL", 71: "STAR MARKING PRACTICE", 72: "INTERNAL STAR FITTING", 73: "FASTEN COMPONENTS", 74: "MARKING AN OIL SLOT", 75: "MAKING TRIANGULAR FITTING", 76: "MAKING DOUBLE SQUARE FITTING"
+        };
+        const ELECT_EXERCISES = {
+            1: "VISIT VARIOUS SECTION AND LOCATION", 2: "IDENTIFY SAFETY SYMBOLS", 3: "PREVENTIVE MEASURES FOR ELECTRICAL ACCIDENT", 4: "SAFETY AND USE OF FIRE FIGHTING", 5: "PRACTICE ELEMENTRY FIRST AID", 6: "DISPOSAL PROCEDURE OF WASTE", 7: "USE OF PROTECTIVE EQUIPMENTS", 8: "PRACTICE OF CLEANLINESS", 9: "IDENTIFY TRADE TOOLS", 10: "PRACTICE SAFE LIFTING", 11: "SELECT PROPER TOOLS", 12: "CARE AND MAINTENANCE OF TOOLS", 13: "OPERATION OF ALLIED TOOLS", 14: "HACKSAWING AND FILING", 15: "PREPARE TERMINALS OF CABLE", 16: "PRACTICE OF SKINNING TWISTING", 17: "MEASURE CONDUCTOR SIZE", 18: "MAKE SIMPLE TWIST MARRIED", 19: "MAKE A BRITANIA STRAIGHT JOINT", 20: "PRACTICE IN SOLDERING", 21: "IDENTIFY VARIOUS PARTS", 22: "MAKE STRAIGHT JOINT", 23: "TEST INSULATION RESISTANCE", 24: "TEST UNDER GROUND CABLES", 25: "IDENTIFY OHM'S LAW", 26: "MEASURE CURRENT AND VOLTAGE", 27: "VERIFY LAWS OF SERIES", 28: "MEASURE VOLTAGE CURRENT", 29: "ANALYSE THE EFFECT OF SHORT", 30: "MEASURE VOLTAGE IN PARALLEL", 31: "MEASURE RESISTANCE USING VOLTAGE", 32: "MEASURE CURRENT AND VOLTAGE", 33: "MEASURE RESISTANCE DROP METHOD", 34: "WHEATSTONE BRIDGE", 35: "THERMAL EFFECT OF ELECTRIC", 36: "CHANGE IN RESISTANCE DUE TO TEMP", 37: "VERIFY CHARACTERISTICS", 38: "PLOT THE FIELD OF A MAGNET", 39: "WIND A SOLENOID", 40: "DETERMINE DIRECTION OF INDUCED EMF", 41: "GENERATION OF MUTUALLY INDUCED EMF", 42: "MEASURE RESISTANCE IMPEDANCE", 43: "IDENTIFY CAPACITORS", 44: "GROUP CAPACITORS", 45: "CHARACTERISTICS OF RL RC", 46: "MEASURE RESONANCE FREQUENCY", 47: "RL RC IN AC PARALLEL", 48: "RESONANCE IN AC PARALLEL", 49: "MEASURE POWER ENERGY", 50: "MEASURE CURRENT VOLTAGE THREE PHASE", 51: "IMPROVEMENT OF PF", 52: "USE OF NEUTRAL", 53: "EFFECT OF BROKEN NEUTRAL", 54: "RELATIONSHIP BETWEEN LINE AND PHASE", 55: "MEASURE POWER OF THREE PHASE", 56: "MEASURE CURRENT OF TWO PHASES", 57: "USE OF VARIOUS TYPES OF CELLS", 58: "GROUPING OF CELLS", 59: "BATTERY CHARGING", 60: "MAINTENANCE OF BATTERIES", 61: "SOLAR CELLS", 62: "IDENTIFY VARIOUS CONDUITS", 63: "CUTTING THREADING", 64: "PREPARE TEST BOARDS", 65: "PVC CASING-CAPPING", 66: "CONTROL ONE LAMP", 67: "CONTROL FROM THREE PLACES", 68: "CONSUMERS MAIN BOARD", 69: "ENERGY METER BOARD", 70: "ESTIMATE WIRING COST", 71: "PRACTICE WIRING RESIDENTIAL", 72: "PRACTICE WIRING INSTITUTE", 73: "FAULT DETECTION", 74: "PIPE EARTHING", 75: "PLATE EARTHING", 76: "TEST EARTH LEAKAGE", 77: "INSTALL LIGHT FITTING", 78: "GROUP WATTAGE OF LAMPS", 79: "INSTALLATION OF VARIOUS LAMPS", 80: "DECORATIVE LAMP CIRCUIT", 81: "SHOW CASE LIGHTING", 82: "ANALOG AND DIGITAL INSTRUMENTS", 83: "MEASURING INSTRUMENTS", 84: "TWO WATTMETER METHODS", 85: "POWER FACTOR METER", 86: "TONG TESTER", 87: "SMART METER", 88: "RANGE EXTENSION", 89: "ERRORS IN RESISTANCE", 90: "TEST SINGLE PHASE ENERGY METER", 91: "DISMANTLE ELECTRICAL PARTS", 92: "REPAIR ELECTRIC IRON", 93: "REPAIR INDUCTION HEATER", 94: "REPAIR MIXER GRINDER", 95: "REPAIR WASHING MACHINE", 96: "VERIFY TERMINALS", 97: "PERFORM OC AND SC TEST", 98: "VOLTAGE REGULATION", 99: "SERIES PARALLEL TRANSFORMERS", 100: "THREE PHASE TRANSFORMER", 101: "3 PHASE OPERATION", 102: "TESTING OF TRANSFORMER OIL"
+        }; 
+
+        for(let i=1; i<=104; i++) {
+            document.getElementById('tool-week').insertAdjacentHTML('beforeend', `<option value="${i}">Week ${i}</option>`);
+            document.getElementById('history-week').insertAdjacentHTML('beforeend', `<option value="${i}">Week ${i}</option>`);
+        }
+
+        let currentUserType = null; let staffTrade = ""; let staffName = ""; let currentStudent = {}; 
+
+        window.onload = function() { 
+            fetchNotices(); 
+            if(!localStorage.getItem('adminCreds')) localStorage.setItem('adminCreds', JSON.stringify({id:'admin', pass:'12345'}));
+            document.getElementById('exc-date').valueAsDate = new Date();
+        };
+
+        // --- SAFE NOTICE BOARD FETCH ---
+        function fetchNotices() {
+            fetch(API_URL + "?action=get_notices").then(res => res.json()).then(data => {
+                let html = ""; let count = 0;
+                if(Array.isArray(data) && data.length > 0) {
+                    if(Array.isArray(data[0])) { // 2D array
+                        for(let i=1; i<data.length; i++) {
+                            if(data[i][1] || data[i][2]) { html += `<div class="notice-item"><span class="notice-date">${data[i][0] ? new Date(data[i][0]).toLocaleDateString() : ''} [${data[i][1]||'INFO'}]</span>${data[i][2]||''}</div>`; count++; }
+                        }
+                    } else { // Object array
+                        data.forEach(n => { html += `<div class="notice-item"><span class="notice-date">${n.date||''} [${n.type||'INFO'}]</span>${n.content||''}</div>`; count++; });
+                    }
+                }
+                if(count === 0) html = `<div class="notice-item"><span class="notice-date">System Notice</span>Welcome to Lakshya Private ITI. Classes are running as scheduled.</div>`;
+                document.getElementById('notice-container-marquee').innerHTML = html;
+            }).catch(e => {
+                document.getElementById('notice-container-marquee').innerHTML = `<div class="notice-item"><span class="notice-date">System Notice</span>Welcome to Lakshya Private ITI. Classes are running as scheduled.</div>`;
+            });
+        }
+
+        // --- NEW BULLETPROOF JS PRINT ENGINE ---
+        function executeSafePrint(type) {
+            document.body.className = '';
+            if(type === 'report') document.body.classList.add('print-mode-report');
+            else if(type === 'card') document.body.classList.add('print-mode-card');
+            else if(type === 'expcert') document.body.classList.add('print-mode-expcert');
+            
+            setTimeout(() => { 
+                window.print(); 
+                document.body.className = ''; 
+            }, 300);
+        }
+
+        // --- LOGIN LOGIC ---
+        function showLogin(type) {
+            currentUserType = type;
+            document.getElementById('login-modal').style.display = 'flex';
+            document.getElementById('login-title').innerText = type.toUpperCase() + " LOGIN";
+            document.getElementById('login-id').value = ""; document.getElementById('login-pass').value = "";
+            document.getElementById('student-login-extras').style.display = type === 'student' ? 'block' : 'none';
+        }
+
+        function processLogin() {
+            const id = document.getElementById('login-id').value; const pass = document.getElementById('login-pass').value;
+            const btn = document.querySelector('#login-modal button.btn-primary');
+            
+            if(currentUserType === 'admin') {
+                let isValid = false;
+                if(id === 'admin' && pass === '12345') isValid = true; 
+                try { const ac = JSON.parse(localStorage.getItem('adminCreds')); if(ac && id === ac.id && pass === ac.pass) isValid = true; } catch(e) {}
+                if(isValid) loginSuccess('admin'); else alert('Invalid Admin Credentials');
+            } else if(currentUserType === 'staff') {
+                btn.innerText = "Authenticating..."; btn.disabled = true;
+                fetch(API_URL + `?action=staff_login&id=${id}&pass=${pass}`).then(res => res.json()).then(data => {
+                    btn.innerText = "Authenticate"; btn.disabled = false;
+                    if(data.status === 'success') { staffTrade = data.trade; staffName = data.name; loginSuccess('staff'); } 
+                    else alert('Invalid Staff Credentials');
+                });
+            } else {
+                btn.innerText = "Locating Student..."; btn.disabled = true;
+                const session = document.getElementById('login-session').value;
+                const trade = document.getElementById('login-trade').value.toUpperCase();
+                const fullSheetName = session + trade; 
+                
+                fetch(API_URL + `?action=get_sheet_data&sheet_name=${encodeURIComponent(fullSheetName)}`).then(res => res.json()).then(data => {
+                    btn.innerText = "Authenticate"; btn.disabled = false;
+                    if(!data || data.length < 2) return alert(`Database not found for Session/Trade: ${fullSheetName}`);
+                    
+                    const rI = data[0].findIndex(h => h.toString().toLowerCase().includes('roll')); const nI = data[0].findIndex(h => h.toString().toLowerCase().includes('name'));
+                    let found = false; let studentName = "";
+                    for(let i=1; i<data.length; i++) { if(data[i][rI>-1?rI:0] == id) { found = true; studentName = data[i][nI>-1?nI:1]; break; } }
+                    
+                    if(found) {
+                        currentStudent = { roll: id, name: studentName, session: session, trade: trade };
+                        document.getElementById('st-dash-name').innerText = currentStudent.name;
+                        document.getElementById('st-dash-roll').innerText = id; document.getElementById('st-dash-trade').innerText = fullSheetName;
+                        loginSuccess('student'); fetchStudentPersonalData(); loadStudyMaterial();
+                    } else alert("Roll Number not found in the selected Session & Trade.");
+                }).catch(e => { btn.innerText = "Authenticate"; btn.disabled = false; alert("Connection Error with Backend."); });
+            }
+        }
+
+        function loginSuccess(role) {
+            document.getElementById('login-modal').style.display = 'none'; document.getElementById('home-section').style.display = 'none';
+            if(role === 'staff') { document.getElementById('staff-panel').style.display = 'block'; document.getElementById('staff-trade-display').innerText = staffTrade; document.getElementById('staff-name-display').innerText = staffName; }
+            else if (role === 'admin') document.getElementById('admin-panel').style.display = 'block';
+            else document.getElementById('student-panel').style.display = 'block';
+        }
+
+        function logout() { location.reload(); }
+
+        /* --- STUDENT DASHBOARD FULL DATA FETCH --- */
+        function fetchStudentPersonalData() {
+            const display = document.getElementById('st-marks-display');
+            display.innerHTML = "<p style='color:var(--primary); font-weight:700;'>⏳ Extracting secure records from cloud...</p>";
+            const tTrade = currentStudent.session + currentStudent.trade.toUpperCase();
+
+            Promise.all([
+                fetch(API_URL + `?action=get_sheet_data&sheet_name=ATTENDANCE`).then(r=>r.json()).catch(()=>[]),
+                fetch(API_URL + `?action=get_sheet_data&sheet_name=MONTHLY MARKS`).then(r=>r.json()).catch(()=>[]),
+                fetch(API_URL + `?action=get_sheet_data&sheet_name=QUARTERLY MARKS`).then(r=>r.json()).catch(()=>[]),
+                fetch(API_URL + `?action=get_sheet_data&sheet_name=JOB EVOLUTION`).then(r=>r.json()).catch(()=>[])
+            ]).then(([a, m, q, j]) => {
+                let html = "";
+                let match = (arr, i) => arr[i].join("").replace(/\s+/g, '').toUpperCase().includes(tTrade.replace(/\s+/g, '')) && arr[i][1] == currentStudent.roll;
+                
+                html += `<h4 style="color:var(--primary); font-size:1.2rem; margin-top:10px;">📅 Attendance History</h4><table class="data-table"><thead><tr><th>Date</th><th>Status</th></tr></thead><tbody>`;
+                let af = false; if(a.length>1) { for(let i=1; i<a.length; i++) { if(match(a,i)) { html+=`<tr><td>${new Date(a[i][0]).toLocaleDateString()}</td><td style="color:${a[i][5]=='P'?'var(--success)':'var(--danger)'}; font-weight:800;">${a[i][5]=='P'?'Present':'Absent'}</td></tr>`; af=true; } } }
+                if(!af) html+=`<tr><td colspan="2">No records found.</td></tr>`; html+=`</tbody></table>`;
+
+                html += `<h4 style="margin-top:30px; color:var(--primary); font-size:1.2rem;">📊 Monthly Assessment</h4><table class="data-table"><thead><tr><th>Month</th><th>Prac(50)</th><th>Thry(20)</th><th>ED(20)</th><th>WCS(10)</th><th>Total</th></tr></thead><tbody>`;
+                let mf = false; if(m.length>1) { for(let i=1; i<m.length; i++) { if(match(m,i)) { html+=`<tr><td>${m[i][4]}</td><td>${m[i][5]}</td><td>${m[i][6]}</td><td>${m[i][8]}</td><td>${m[i][7]}</td><td style="font-weight:800; color:var(--primary-light);">${m[i][9]}</td></tr>`; mf=true; } } }
+                if(!mf) html+=`<tr><td colspan="6">No records found.</td></tr>`; html+=`</tbody></table>`;
+
+                html += `<h4 style="margin-top:30px; color:var(--primary); font-size:1.2rem;">📈 Quarterly Assessment</h4><table class="data-table"><thead><tr><th>Quarter</th><th>Prac(50)</th><th>Thry(20)</th><th>ED(20)</th><th>WCS(10)</th><th>Total</th></tr></thead><tbody>`;
+                let qf = false; if(q.length>1) { for(let i=1; i<q.length; i++) { if(match(q,i)) { html+=`<tr><td>${q[i][4]}</td><td>${q[i][5]}</td><td>${q[i][6]}</td><td>${q[i][8]}</td><td>${q[i][7]}</td><td style="font-weight:800; color:var(--primary-light);">${q[i][9]}</td></tr>`; qf=true; } } }
+                if(!qf) html+=`<tr><td colspan="6">No records found.</td></tr>`; html+=`</tbody></table>`;
+
+                html += `<h4 style="margin-top:30px; color:var(--primary); font-size:1.2rem;">🛠️ Job Evolution</h4><table class="data-table"><thead><tr><th>Week</th><th>A(10)</th><th>B(15)</th><th>C(8)</th><th>D(7)</th><th>E(10)</th><th>Total</th></tr></thead><tbody>`;
+                let jf = false; if(j.length>1) { for(let i=1; i<j.length; i++) { 
+                    if(j[i].join("").replace(/\s+/g, '').toUpperCase().includes(tTrade.replace(/\s+/g, '')) && j[i][0] == currentStudent.roll) {
+                    html+=`<tr><td>${j[i][4]}</td><td>${j[i][5]}</td><td>${j[i][6]}</td><td>${j[i][7]}</td><td>${j[i][8]}</td><td>${j[i][9]}</td><td style="font-weight:800; color:var(--primary-light);">${j[i][10]}</td></tr>`; jf=true; } 
+                } }
+                if(!jf) html+=`<tr><td colspan="7">No records found.</td></tr>`; html+=`</tbody></table>`;
+
+                display.innerHTML = html;
+            }).catch(e => display.innerHTML="<p style='color:red'>Failed to load data from server.</p>");
+        }
+
+        /* --- ADMIN/STAFF PANEL NAVIGATION --- */
+        let activeTool = "";
+        function hideAllAdminSections() {
+            if(document.getElementById('admin-welcome')) document.getElementById('admin-welcome').style.display = 'none'; 
+            document.getElementById('entry-tool-container').style.display = 'none';
+            document.getElementById('admin-tools-wrapper').style.display = 'none'; 
+            document.getElementById('admin-tool-container').style.display = 'none'; 
+            document.getElementById('progress-card-area').style.display = 'none';
+            document.getElementById('exp-cert-area').style.display = 'none';
+            document.getElementById('settings-area').style.display = 'none'; 
+            document.getElementById('manage-staff-area').style.display = 'none';
+            if(document.getElementById('entry-tool-container').parentElement === document.getElementById('admin-content-area')) { document.getElementById('entry-tool-container').style.display = 'none'; }
+            document.querySelectorAll('.side-btn').forEach(b => b.classList.remove('active'));
+        }
+
+        function openEntryTool(tool) {
+            activeTool = tool; const entryContainer = document.getElementById('entry-tool-container');
+            if(event) event.currentTarget.classList.add('active');
+            
+            if(currentUserType === 'staff') {
+                document.getElementById('staff-entry-area').innerHTML = ''; document.getElementById('staff-entry-area').appendChild(entryContainer); entryContainer.style.display = 'block';
+                entryContainer.querySelector('#tool-trade').value = staffTrade; entryContainer.querySelector('#tool-trade').disabled = true;
+            } else {
+                hideAllAdminSections(); if(event) event.currentTarget.classList.add('active');
+                document.getElementById('admin-content-area').appendChild(entryContainer); entryContainer.style.display = 'block'; 
+            }
+            
+            entryContainer.querySelector('#date-input-div').style.display = 'none'; 
+            entryContainer.querySelector('#month-input-div').style.display = 'none'; 
+            entryContainer.querySelector('#quarter-input-div').style.display = 'none';
+            entryContainer.querySelector('#week-input-div').style.display = 'none';
+
+            let title = "";
+            if(tool === 'attendance') { title = "📅 Attendance Data Entry"; entryContainer.querySelector('#date-input-div').style.display = 'block'; }
+            else if(tool === 'monthly') { title = "📊 Monthly Marks Entry"; entryContainer.querySelector('#month-input-div').style.display = 'block'; }
+            else if(tool === 'quarterly') { title = "📈 Quarterly Marks Entry"; entryContainer.querySelector('#quarter-input-div').style.display = 'block'; }
+            else if(tool === 'job') { title = "🛠️ Job Evolution Entry"; entryContainer.querySelector('#week-input-div').style.display = 'block'; }
+            
+            entryContainer.querySelector('#tool-title').innerText = title; entryContainer.querySelector('#entry-table').innerHTML = ''; 
+        }
+
+        function openAdminTool(action) {
+            adminAction = action; hideAllAdminSections(); if(event) event.currentTarget.classList.add('active');
+            document.getElementById('admin-tools-wrapper').style.display = 'block'; const histContainer = document.getElementById('admin-tool-container'); document.getElementById('admin-content-area').appendChild(document.getElementById('admin-tools-wrapper')); histContainer.style.display = 'block';
+            document.getElementById('admin-result-area').innerHTML = ""; document.getElementById('history-date-span').style.display = 'none'; document.getElementById('history-month-span').style.display = 'none'; document.getElementById('history-quarter-span').style.display = 'none'; document.getElementById('history-week-span').style.display = 'none';
+            
+            if(action === 'notice') {
+                document.getElementById('admin-filters').style.display = 'none'; document.getElementById('notice-form-area').style.display = 'block'; document.getElementById('history-title').innerText = "📢 Publish Campus Notice";
+            } else {
+                document.getElementById('admin-filters').style.display = 'flex'; document.getElementById('notice-form-area').style.display = 'none';
+                document.getElementById('history-title').innerText = action.replace('history_', '').toUpperCase() + " RECORDS";
+                if(action === 'history_attendance') document.getElementById('history-date-span').style.display = 'block';
+                else if(action === 'history_monthly') document.getElementById('history-month-span').style.display = 'block';
+                else if(action === 'history_quarterly') document.getElementById('history-quarter-span').style.display = 'block';
+                else if(action === 'history_job') document.getElementById('history-week-span').style.display = 'block';
+            }
+        }
+
+        function loadStudentListForTool() {
+            const container = document.getElementById('entry-tool-container');
+            const session = container.querySelector('#tool-session').value.trim();
+            const trade = container.querySelector('#tool-trade').value.trim().toUpperCase();
+            const targetUnit = container.querySelector('#tool-unit').value.trim();
+            const fullSheetName = session + trade; 
+
+            const btn = container.querySelector('.btn-primary'); btn.innerText = "⏳ Loading..."; btn.disabled = true;
+
+            fetch(API_URL + `?action=get_sheet_data&sheet_name=${encodeURIComponent(fullSheetName)}`)
+            .then(res => res.json())
+            .then(data => {
+                btn.innerText = "📥 Fetch Students"; btn.disabled = false;
+                if(!data || data.length < 2) return alert(`No students found! Ensure Google Sheet tab is named exactly: ${fullSheetName}`);
+                
+                const headers = data[0].map(h => h.toString().toLowerCase());
+                const rI = headers.findIndex(h => h.includes('roll')) > -1 ? headers.findIndex(h => h.includes('roll')) : 0;
+                const nI = headers.findIndex(h => h.includes('name')) > -1 ? headers.findIndex(h => h.includes('name')) : 1;
+                const uI = headers.findIndex(h => h.includes('unit')) > -1 ? headers.findIndex(h => h.includes('unit')) : 3;
+
+                let students = [];
+                for(let i=1; i<data.length; i++) {
+                    if(data[i][uI] == targetUnit) students.push({ roll: data[i][rI], name: data[i][nI], unit: data[i][uI] });
+                }
+                if(students.length === 0) return alert(`No students in Unit ${targetUnit}.`);
+
+                const table = container.querySelector('#entry-table'); let thead = "", rows = "";
+                if(activeTool === 'attendance') {
+                    thead = `<tr><th>Roll</th><th style="text-align:left;">Name</th><th>Attendance</th></tr>`;
+                    students.forEach(s => rows += `<tr class="data-row" data-roll="${s.roll}" data-name="${s.name}" data-unit="${s.unit}"><td style="font-weight:bold;">${s.roll}</td><td style="text-align:left; font-weight:700;">${s.name}</td><td><select class="inp-status" style="width:120px; font-weight:bold;"><option value="P" style="color:var(--success);">Present</option><option value="A" style="color:var(--danger);">Absent</option></select></td></tr>`);
+                } else if(activeTool === 'monthly' || activeTool === 'quarterly') {
+                    thead = `<tr><th>Roll</th><th style="text-align:left;">Name</th><th>Prac(50)</th><th>Thry(20)</th><th>ED(20)</th><th>WCS(10)</th><th>Total</th></tr>`;
+                    students.forEach(s => rows += `<tr class="data-row" data-roll="${s.roll}" data-name="${s.name}" data-unit="${s.unit}"><td style="font-weight:bold;">${s.roll}</td><td style="text-align:left; font-weight:700;">${s.name}</td>
+                        <td><input type="number" class="editable-input m-prac" oninput="autoNext(this, 50, true)"></td><td><input type="number" class="editable-input m-thry" oninput="autoNext(this, 20, true)"></td><td><input type="number" class="editable-input m-ed" oninput="autoNext(this, 20, true)"></td><td><input type="number" class="editable-input m-wcs" oninput="autoNext(this, 10, true)"></td><td><input type="text" class="m-total" readonly style="width:60px; border:none; background:transparent; font-weight:bold;"></td></tr>`);
+                } else if(activeTool === 'job') {
+                    thead = `<tr><th>Roll</th><th style="text-align:left;">Name</th><th>A(10)</th><th>B(15)</th><th>C(8)</th><th>D(7)</th><th>E(10)</th><th>Total</th></tr>`;
+                    students.forEach(s => rows += `<tr class="data-row" data-roll="${s.roll}" data-name="${s.name}" data-unit="${s.unit}"><td style="font-weight:bold;">${s.roll}</td><td style="text-align:left; font-weight:700;">${s.name}</td>
+                        <td><input type="number" class="editable-input j-a" oninput="autoNext(this, 10, false)"></td><td><input type="number" class="editable-input j-b" oninput="autoNext(this, 15, false)"></td><td><input type="number" class="editable-input j-c" oninput="autoNext(this, 8, false)"></td><td><input type="number" class="editable-input j-d" oninput="autoNext(this, 7, false)"></td><td><input type="number" class="editable-input j-e" oninput="autoNext(this, 10, false)"></td><td><input type="text" class="j-total" readonly style="width:60px; border:none; background:transparent; font-weight:bold;"></td></tr>`);
+                }
+                table.innerHTML = `<thead>${thead}</thead><tbody>${rows}</tbody>`;
+                table.className = "data-table";
+            }).catch(err => { alert("Failed to fetch."); btn.innerText = "📥 Fetch Students"; btn.disabled = false; });
+        }
+
+        function autoNext(elem, maxVal, isMonthly) {
+            let val = Number(elem.value); if(val > maxVal) { elem.value = maxVal; val = maxVal; } if(val < 0) elem.value = 0;
+            let strVal = elem.value.toString();
+            if(strVal.length >= 2 || (maxVal < 10 && strVal.length >= 1)) {
+                let inputs = Array.from(elem.closest('tr').querySelectorAll('input[type="number"]'));
+                let idx = inputs.indexOf(elem); if(idx > -1 && idx < inputs.length - 1) inputs[idx + 1].focus(); 
+            }
+            const row = elem.closest('tr'); const v = (cls) => Number(row.querySelector(cls).value) || 0;
+            if(isMonthly) row.querySelector('.m-total').value = v('.m-prac') + v('.m-thry') + v('.m-ed') + v('.m-wcs');
+            else row.querySelector('.j-total').value = v('.j-a') + v('.j-b') + v('.j-c') + v('.j-d') + v('.j-e');
+        }
+
+        function submitStaffData() {
+            const rows = document.querySelectorAll('.data-row'); if(rows.length === 0) return alert("Load students first!");
+            const session = document.querySelector('#tool-session').value.trim(); const trade = document.querySelector('#tool-trade').value.trim().toUpperCase();
+            const fullTradeName = session + trade; let payload = { type: "", entries: [] };
+
+            if(activeTool === 'attendance') {
+                const date = document.querySelector('#tool-date').value; if(!date) return alert("Select date!"); 
+                payload.type = "attendance"; rows.forEach(r => payload.entries.push([date, r.dataset.roll, r.dataset.name, fullTradeName, r.dataset.unit, r.querySelector('.inp-status').value]));
+            } else if(activeTool === 'monthly') {
+                const m = document.querySelector('#tool-month').value; payload.type = "monthly_marks";
+                rows.forEach(r => payload.entries.push([m, r.dataset.roll, r.dataset.name, fullTradeName, m, r.querySelector('.m-prac').value, r.querySelector('.m-thry').value, r.querySelector('.m-wcs').value, r.querySelector('.m-ed').value, r.querySelector('.m-total').value]));
+            } else if(activeTool === 'quarterly') {
+                const q = document.querySelector('#tool-quarter').value; payload.type = "quarterly_marks";
+                rows.forEach(r => payload.entries.push([q, r.dataset.roll, r.dataset.name, fullTradeName, q, r.querySelector('.m-prac').value, r.querySelector('.m-thry').value, r.querySelector('.m-wcs').value, r.querySelector('.m-ed').value, r.querySelector('.m-total').value]));
+            } else if(activeTool === 'job') {
+                const w = document.querySelector('#tool-week').value; payload.type = "job_marks";
+                rows.forEach(r => payload.entries.push([r.dataset.roll, r.dataset.name, fullTradeName, r.dataset.unit, "Week " + w, r.querySelector('.j-a').value, r.querySelector('.j-b').value, r.querySelector('.j-c').value, r.querySelector('.j-d').value, r.querySelector('.j-e').value, r.querySelector('.j-total').value, ""]));
+            }
+            const btn = document.querySelector('#data-entry-form .btn-success'); btn.innerText = "⏳ Encrypting & Saving..."; btn.disabled = true;
+            fetch(API_URL, { method: "POST", body: JSON.stringify(payload) }).then(res => res.json()).then(data => { 
+                alert("✅ Saved to Database!"); btn.innerText = "📤 SECURE & UPLOAD DATA"; btn.disabled = false;
+            }).catch(err => { alert("Error."); btn.innerText = "📤 SECURE & UPLOAD DATA"; btn.disabled = false; });
+        }
+
+        // --- EXACT MATCH ADMIN REPORT HISTORY ---
+        function loadAdminHistory() {
+            let sheetName = "";
+            if(adminAction === 'history_attendance') sheetName = "ATTENDANCE"; else if(adminAction === 'history_monthly') sheetName = "MONTHLY MARKS";
+            else if(adminAction === 'history_quarterly') sheetName = "QUARTERLY MARKS"; else if(adminAction === 'history_job') sheetName = "JOB EVOLUTION";
+
+            const session = document.getElementById('history-session').value.trim(); const trade = document.getElementById('admin-trade').value.trim().toUpperCase();
+            const unit = document.getElementById('admin-unit').value; const histDate = document.getElementById('history-date').value;
+            const histMonth = document.getElementById('history-month').value.toUpperCase(); const histQuarter = document.getElementById('history-quarter').value.toUpperCase();
+            const histWeek = document.getElementById('history-week').value;
+
+            const fullTradeName = (session + trade).replace(/\s+/g, '').toUpperCase(); 
+
+            const btn = document.querySelector('#admin-filters .btn-primary'); btn.innerText = "Searching..."; btn.disabled = true;
+            document.getElementById('admin-result-area').innerHTML = "<p style='text-align:center; padding:30px; font-weight:bold; color:var(--primary);'>Retrieving Records from Cloud...</p>";
+
+            fetch(API_URL + `?action=get_sheet_data&sheet_name=${sheetName}`).then(res => res.text()).then(text => {
+                btn.innerText = "🔍 Filter Data"; btn.disabled = false;
+                let data; try { data = JSON.parse(text); } catch(e) { return document.getElementById('admin-result-area').innerHTML = `<p style='color:red;'>Raw Server Error.</p>`; }
+                if(!data || data.length === 0) return document.getElementById('admin-result-area').innerHTML = "<p>No Data Found</p>";
+                
+                let headers = data[0]; let table = `<table class="data-table report-print-table"><thead><tr>`; headers.forEach(h => table += `<th>${h}</th>`); table += `</tr></thead><tbody>`;
+                let count = 0;
+                
+                for(let i=1; i<data.length; i++) {
+                    let row = data[i]; 
+                    let rowStr = row.join("||").replace(/\s+/g, '').toUpperCase(); 
+                    
+                    if(rowStr.includes(fullTradeName)) {
+                        let match = true;
+                        
+                        if(sheetName === 'ATTENDANCE' || sheetName === 'JOB EVOLUTION') {
+                            let uCell = (sheetName === 'ATTENDANCE') ? row[4] : row[3];
+                            if(String(uCell).trim() !== unit) match = false;
+                        }
+                        if(sheetName === 'ATTENDANCE' && histDate) { if(new Date(row[0]).toLocaleDateString() !== new Date(histDate).toLocaleDateString()) match = false; }
+                        if(sheetName === 'MONTHLY MARKS' && histMonth) { if(String(row[0]).toUpperCase() !== histMonth) match = false; }
+                        if(sheetName === 'QUARTERLY MARKS' && histQuarter) { if(String(row[0]).toUpperCase() !== histQuarter) match = false; }
+                        if(sheetName === 'JOB EVOLUTION' && histWeek) { if(String(row[4]).toUpperCase().replace(/\s+/g,'') !== ("WEEK"+histWeek)) match = false; }
+
+                        if(match) { 
+                            count++; table += `<tr>`; 
+                            row.forEach((cell, idx) => {
+                                let val = cell;
+                                if(String(val).replace(/\s+/g, '').toUpperCase() === fullTradeName) val = `<span style="background:var(--accent); color:white; padding:4px 10px; border-radius:12px; font-weight:800; font-size:0.8rem;">${trade}</span>`;
+                                if(idx === 0 && sheetName === 'ATTENDANCE') val = new Date(val).toLocaleDateString();
+                                table += `<td>${val}</td>`;
+                            }); 
+                            table += `</tr>`; 
+                        }
+                    }
+                }
+                table += `</tbody></table>`;
+                if(count === 0) document.getElementById('admin-result-area').innerHTML = `<p style="text-align:center; padding:30px; font-weight:bold; color:var(--gray);">No records found for the selected filters.</p>`;
+                else document.getElementById('admin-result-area').innerHTML = table;
+            }).catch(e => { btn.innerText = "🔍 Filter Data"; btn.disabled = false; document.getElementById('admin-result-area').innerHTML = "Fetch Failed."; });
+        }
+
+        // --- PROGRESS CARD WITH PROPER COLUMN WIDTHS (<colgroup>) ---
+        let selectedTradeForPC = "";
+        function setupProgressCard(trade) {
+            selectedTradeForPC = trade; hideAllAdminSections(); if(event) event.currentTarget.classList.add('active');
+            document.getElementById('admin-tools-wrapper').style.display = 'block'; 
+            const pcContainer = document.getElementById('progress-card-area'); 
+            document.getElementById('admin-content-area').appendChild(document.getElementById('admin-tools-wrapper')); 
+            pcContainer.style.display = 'block';
+        }
+
+        function generateProgressCard() {
+            const roll = document.getElementById('pc-roll').value;
+            const session = document.getElementById('pc-session-select').value.trim();
+            const fullTradeName = session + selectedTradeForPC.toUpperCase();
+
+            if(!roll) return alert("Please enter Student Roll No.");
+            
+            document.getElementById('pc-roll-display-1').innerText = roll; document.getElementById('pc-session-display-1').innerText = session;
+            document.getElementById('pc-roll-display-2').innerText = roll; document.getElementById('pc-name-1').innerText = "Loading..."; document.getElementById('pc-name-2').innerText = "Loading...";
+            
+            let html1 = "", html2 = "";
+            let exercises = selectedTradeForPC === 'Fitter' ? FITTER_EXERCISES : ELECT_EXERCISES;
+            
+            for(let w=1; w<=104; w++) {
+                let exName = exercises[w] || "";
+                let rowHtml = `<tr>
+                    <td style="text-align:center; font-weight:bold; color:black;">${w}</td>
+                    <td style="text-align:left; font-weight:bold; color:black; font-size:11px; padding-left:5px;">${exName}</td>
+                    <td contenteditable="true" class="editable-input" style="border:none; width:100%; background:transparent;"></td>
+                    <td contenteditable="true" class="sign-cell" title="Click to Sign"></td>
+                    <td contenteditable="true" class="editable-input" style="border:none; width:100%; background:transparent;"></td>
+                </tr>`;
+                
+                if(w <= 52) html1 += rowHtml; 
+                else html2 += rowHtml;
+            }
+            document.getElementById('pc-tbody-1').innerHTML = html1; 
+            document.getElementById('pc-tbody-2').innerHTML = html2; 
+
+            fetch(API_URL + `?action=get_sheet_data&sheet_name=${encodeURIComponent(fullTradeName)}`).then(r=>r.json()).then(data => {
+                if(!data || data.length < 2) { alert(`Sheet not found. Blank card generated.`); document.getElementById('pc-name-1').innerText = "__________________"; document.getElementById('pc-name-2').innerText = "__________________"; return; }
+                const headers = data[0].map(h => h.toString().toLowerCase());
+                const rI = headers.findIndex(h => h.includes('roll')) > -1 ? headers.findIndex(h => h.includes('roll')) : 0;
+                const nI = headers.findIndex(h => h.includes('name')) > -1 ? headers.findIndex(h => h.includes('name')) : 1;
+
+                let f = false;
+                for(let i=1; i<data.length; i++) { if(data[i][rI] == roll) { document.getElementById('pc-name-1').innerText = data[i][nI]; document.getElementById('pc-name-2').innerText = data[i][nI]; f = true; break; } }
+                if(!f) { document.getElementById('pc-name-1').innerText = "NOT FOUND"; document.getElementById('pc-name-2').innerText = "NOT FOUND"; alert("Student not found."); }
+            }).catch(e => { document.getElementById('pc-name-1').innerText = "Error"; document.getElementById('pc-name-2').innerText = "Error"; });
+        }
+
+        // --- NEW EXPERIENCE CERTIFICATE MULTI-DATE LOGIC ---
+        function setupExpCert() {
+            hideAllAdminSections(); if(event) event.currentTarget.classList.add('active');
+            document.getElementById('admin-tools-wrapper').style.display = 'block'; 
+            const ecContainer = document.getElementById('exp-cert-area'); 
+            document.getElementById('admin-content-area').appendChild(document.getElementById('admin-tools-wrapper')); 
+            ecContainer.style.display = 'block';
+        }
+
+        function addDatePeriod() {
+            const div = document.createElement('div');
+            div.style.display = 'flex'; div.style.gap = '10px'; div.style.alignItems = 'center'; div.style.marginBottom = '10px';
+            div.className = 'date-period';
+            div.innerHTML = `
+                <span>From:</span><input type="date" class="exc-from">
+                <span>To:</span><input type="text" class="exc-to" placeholder="Date or 'till date'" value="till date">
+                <button type="button" class="btn btn-danger" style="padding:8px 12px; font-size:0.8rem;" onclick="this.parentElement.remove()">Remove</button>
+            `;
+            document.getElementById('date-periods-container').appendChild(div);
+        }
+
+        function generateExpCert() {
+            document.getElementById('exc-name-display').innerText = document.getElementById('exc-name').value || "__________";
+            document.getElementById('exc-fname-display').innerText = document.getElementById('exc-fname').value || "__________";
+            document.getElementById('exc-desig-display').innerText = document.getElementById('exc-desig').value;
+            document.getElementById('exc-ref-display').innerText = document.getElementById('exc-ref').value;
+            
+            let issueDate = document.getElementById('exc-date').value;
+            document.getElementById('exc-date-display').innerText = issueDate ? new Date(issueDate).toLocaleDateString('en-GB') : "__________";
+
+            let periods = document.querySelectorAll('.date-period');
+            let periodsList = [];
+            periods.forEach(p => {
+                let f = p.querySelector('.exc-from').value;
+                let t = p.querySelector('.exc-to').value;
+                if(f) {
+                    let fromStr = new Date(f).toLocaleDateString('en-GB');
+                    periodsList.push(`${fromStr} to ${t || 'till date'}`);
+                }
+            });
+
+            let periodHTML = "";
+            if(periodsList.length === 0) {
+                periodHTML = `from <strong>__________</strong> to <strong>__________</strong>`;
+            } else if (periodsList.length === 1) {
+                let parts = periodsList[0].split(' to ');
+                periodHTML = `from <strong>${parts[0]}</strong> to <strong>${parts[1]}</strong>`;
+            } else {
+                periodHTML = `during the following periods:<br><br><strong style="display:inline-block; margin-left:30px; line-height:1.6; font-size:15px;">` + periodsList.join('<br>') + `</strong><br><br>He/She worked with us `;
+            }
+            document.getElementById('exc-periods-display').innerHTML = periodHTML;
+            
+            // Show certificate on screen
+            document.getElementById('exc-content').style.display = 'block';
+        }
+
+        // Settings
+        function openSettings() { hideAllAdminSections(); if(event) event.currentTarget.classList.add('active'); const s = document.getElementById('settings-area'); document.getElementById('admin-content-area').appendChild(s); s.style.display = 'block'; }
+        function openManageStaff() { hideAllAdminSections(); if(event) event.currentTarget.classList.add('active'); const m = document.getElementById('manage-staff-area'); document.getElementById('admin-content-area').appendChild(m); m.style.display = 'block'; loadStaffList(); }
+        function createStaff() {
+            const u = document.getElementById('create-staff-user').value; const p = document.getElementById('create-staff-pass').value; const n = document.getElementById('create-staff-name').value; const t = document.getElementById('create-staff-trade').value;
+            if(!u || !p || !n) return; fetch(API_URL, { method: "POST", body: JSON.stringify({type: "create_staff", username: u, password: p, trade: t, name: n}) }).then(res => res.json()).then(data => { alert(data.status); loadStaffList(); });
+        }
+        function loadStaffList() {
+            fetch(API_URL + "?action=get_staff_list").then(res => res.json()).then(data => {
+                let html = `<table class="data-table"><thead><tr><th>User</th><th>Name</th><th>Trade</th><th>Action</th></tr></thead><tbody>`;
+                data.forEach(s => { html += `<tr><td style="font-weight:700;">${s.username}</td><td style="font-weight:600;">${s.name}</td><td><span style="background:var(--primary-light); color:white; padding:4px 8px; border-radius:6px; font-size:0.8rem;">${s.trade}</span></td><td><button class="btn btn-outline" style="padding:6px 12px; font-size:0.8rem; color:var(--danger); border-color:var(--danger);" onclick="deleteStaff('${s.username}')">Remove</button></td></tr>`; });
+                document.getElementById('staff-list-display').innerHTML = html + `</tbody></table>`;
+            });
+        }
+        function deleteStaff(username) { if(confirm("Delete " + username + "?")) fetch(API_URL, { method: "POST", body: JSON.stringify({type: "delete_staff", username: username}) }).then(res => res.json()).then(data => { alert(data.status); loadStaffList(); }); }
+        function saveAdminCredentials() { const aid = document.getElementById('new-admin-id').value; const apass = document.getElementById('new-admin-pass').value; if(aid && apass) { localStorage.setItem('adminCreds', JSON.stringify({id: aid, pass: apass})); alert("Updated!"); location.reload(); } }
+        function publishNotice() { const t = document.getElementById('notice-title').value; const c = document.getElementById('notice-content').value; if(!t || !c) return; fetch(API_URL, { method: "POST", body: JSON.stringify({type:"notice", title:t, content:c}) }).then(res => res.json()).then(data => { alert("Published!"); document.getElementById('notice-title').value=''; document.getElementById('notice-content').value=''; fetchNotices();}); }
+        function loadStudyMaterial() {
+             fetch(API_URL + "?action=get_study_material").then(res=>res.json()).then(data=>{
+                 let h=""; data.forEach(i=>h+=`<tr><td style="font-weight:800;">${i.year}</td><td><span style="background:var(--accent); color:white; padding:4px 12px; border-radius:10px; font-size:0.8rem; font-weight:800;">${i.trade}</span></td><td style="font-weight:700;">${i.subject}</td><td><a href="${i.link}" target="_blank" style="color:var(--white); background:var(--primary); padding:8px 15px; border-radius:8px; font-weight:700; text-decoration:none; font-size:0.85rem;">📥 Open PDF</a></td></tr>`);
+                 document.querySelector('#material-table tbody').innerHTML=h;
+             });
+        }
+    </script>
+</body>
+</html>
